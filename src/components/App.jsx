@@ -1,25 +1,27 @@
 import { useState, useEffect, useRef } from 'react';
 import { nanoid } from 'nanoid';
 // import contacts from 'Data/contacts.json';
+import { phoneContacts } from '../store/taskReducerSlice';
+import {useSelector} from 'react-redux';
 import { ContactForm } from './ContactForm/ContactForm';
 import { Filter } from './Filter/Filter';
 import { ContactList } from './ContactList/ContactList';
 import css from 'components/App.module.css';
 
 export const App = () => {
-  const [contacts, setContacts] = useState([]);
+  const store = useSelector(phoneContacts);
+  const [contacts, setContacts] = useState([store]);
   const [filter, setFilter] = useState('');
   const isFirstRender = useRef(true);
 
-  useEffect(() => {
-    const localContacts = localStorage.getItem('contacts');
-    const parsedContacts = JSON.parse(localContacts);
-    console.log(parsedContacts);
-
-    if (parsedContacts) {
-      setContacts(parsedContacts);
-    }
-  }, []);
+  // useEffect(() => {
+    // const localContacts = localStorage.getItem('contacts');
+    // const parsedContacts = JSON.parse(localContacts);
+    // console.log(parsedContacts);
+  //   if (parsedContacts) {
+  //     setContacts(parsedContacts);
+  //   }
+  // }, []);
 
   useEffect(() => {
     if (isFirstRender.current) {
