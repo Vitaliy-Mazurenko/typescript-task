@@ -2,7 +2,7 @@
   "name": "react-phonebook",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://Vitaliy-Mazurenko.github.io/react-phonebook/",
+  "homepage": "https://Vitaliy-Mazurenko.github.io/React-phonebook/",
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.3",
     "@testing-library/react": "^12.1.4",
