@@ -1,8 +1,8 @@
 import { configureStore } from '@reduxjs/toolkit';
-import taskReducerSlice from './taskReducerSlice';
+import contactsReducer from './taskReducerSlice';
 
 export default configureStore({
   reducer: {
-   taskReducer: taskReducerSlice,
+    contacts: contactsReducer,
   },
 });

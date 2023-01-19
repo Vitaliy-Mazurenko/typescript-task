@@ -1,8 +1,8 @@
 import { useState, useEffect, useRef } from 'react';
 import { nanoid } from 'nanoid';
 // import contacts from 'Data/contacts.json';
-import { phoneContacts } from '../store/taskReducerSlice';
-import {useSelector} from 'react-redux';
+import { phoneContacts, newContact, delContact } from '../store/taskReducerSlice';
+import { useDispatch, useSelector} from 'react-redux';
 import { ContactForm } from './ContactForm/ContactForm';
 import { Filter } from './Filter/Filter';
 import { ContactList } from './ContactList/ContactList';
@@ -10,9 +10,16 @@ import css from 'components/App.module.css';
 
 export const App = () => {
   const store = useSelector(phoneContacts);
-  const [contacts, setContacts] = useState([store]);
+  // console.log(phoneContacts);
+  // const store = useSelector((state) => {
+	// 	console.log(state);
+  //   console.log(state.contacts);
+  //   return state.contacts.items;
+	// });
+  console.log(store);
   const [filter, setFilter] = useState('');
   const isFirstRender = useRef(true);
+  const dispatch = useDispatch();
 
   // useEffect(() => {
     // const localContacts = localStorage.getItem('contacts');
@@ -28,16 +35,16 @@ export const App = () => {
       isFirstRender.current = false;
       return;
     } else {
-      localStorage.setItem('contacts', JSON.stringify(contacts));
+      localStorage.setItem('contacts', JSON.stringify(store));
     }
-  }, [contacts]);
+  }, [store]);
 
   const handleFilterChange = e => {
     setFilter(e.target.value);
   };
 
   const addContact = (name, number) => {
-    const isInclude = contacts.find(
+    const isInclude = store.find(
       contact => contact.name.toLowerCase() === name.toLowerCase()
     );
     const contact = {
@@ -50,22 +57,20 @@ export const App = () => {
       alert(`${name} is already in contacts.`);
       return;
     }
-
-    setContacts(prevState => [contact, ...prevState]);
+    dispatch(newContact(contact));
   };
 
   const deleteContact = contactId => {
-    setContacts(prevState => {
-      return prevState.filter(contact => contact.id !== contactId);
-    });
+    dispatch(delContact(contactId));
   };
 
   const searchContact = filter.toLowerCase();
-  const filteredContacts = contacts
+  const filteredContacts = store
     .filter(contact => contact.name.toLowerCase().includes(searchContact))
     .sort((firstContact, secondContact) =>
       firstContact.name.localeCompare(secondContact.name)
     );
+    // console.log(filteredContacts);
 
   return (
     <div className={css.thumb}>

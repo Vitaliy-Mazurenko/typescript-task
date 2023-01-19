@@ -1,27 +1,27 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-export const taskReducerSlice = createSlice({
+export const contactsReducer = createSlice({
   name: 'store',
   initialState: {
-    id: 'id-1',
-    name: 'Rosie Simpson',
-    number: '459-12-56',
+    items: [{
+      id: 'id-1',
+      name: 'Rosie Simpson',
+      number: '459-12-56',
+    }],
+    filter: '',
   },
   reducers: {
-    setId: (state, data) => {
-      state.id = +data.payload;
+    newContact: (state, action) => {
+      state.items = [...state.items, action.payload];
     },
-    setName: (state, data) => {
-      state.name = +data.payload;
+    delContact: (state, action) => {
+      state.items = state.items.filter(contact => contact.id !== action.payload);
     },
-    setNumber: (state, data) => {
-      state.number = +data.payload;
-    }
   },
 });
 
-export const { setId, setName, setNumber } = taskReducerSlice.actions;
+export const { newContact, delContact } = contactsReducer.actions;
 
-export const phoneContacts = state => state.taskReducer;
+export const phoneContacts = state => state.contacts.items;
 
-export default taskReducerSlice.reducer;
+export default contactsReducer.reducer;
