@@ -18,7 +18,7 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "lint:js": "node_modules/eslint/bin/eslint.js ./ ./**/*.js --fix; exit 0",
+    "lint:js": "node_modules/eslint/bin/eslint.js ./**/*.js --fix; exit 0",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
