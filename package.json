@@ -18,7 +18,7 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "lint": "eslint src",
+    "lint": "npm run lint:js",
     "lint:fix": "eslint --fix src",
     "start": "react-scripts start",
     "build": "react-scripts build",
