@@ -55,7 +55,15 @@
 ],
 "semi": "off",
 "@typescript-eslint/semi": "error",
-"jsx-a11y/label-has-for": "off",
-"label-has-associated-control": "warn"
+"jsx-a11y/label-has-associated-control": [ "error", {
+  "required": {
+    "some": [ "nesting", "id"  ]
+  }
+}],
+"jsx-a11y/label-has-for": [ "error", {
+  "required": {
+    "some": [ "nesting", "id"  ]
+  }
+}]
     }
 }
