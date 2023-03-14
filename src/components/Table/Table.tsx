@@ -8,7 +8,7 @@ const Table: React.FC = () => {
   return (
     <div className="table-wrap">
       <span id="goBack-btn">
-        <button onClick={() => navigate('/')}>Back</button>
+        <button type="button" onClick={() => navigate('/')}>Back</button>
       </span>
       <span>
         <table className="Mtable" aria-label="simple table">

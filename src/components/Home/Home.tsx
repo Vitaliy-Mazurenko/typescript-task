@@ -43,9 +43,9 @@ const Home: React.FC = () => {
       <div className="creat-wrap">
         <div className="input-wrap">
           <form onSubmit={(e) => handleClick(e)} className="homeForm" ref={ref}>
-            <label>columns</label>
+            <label htmlFor="columns">columns</label>
             <input
-              autoFocus
+              // autoFocus
               id="columns"
               type="number"
               name="columns"
@@ -54,7 +54,7 @@ const Home: React.FC = () => {
               onChange={handleChange}
               required
             />
-            <label>rows</label>
+            <label htmlFor="rows">rows</label>
             <input
               id="rows"
               type="number"
@@ -64,7 +64,7 @@ const Home: React.FC = () => {
               onChange={handleChange}
               required
             />
-            <label>near</label>
+            <label htmlFor="near">near</label>
             <input
               id="near"
               type="number"
@@ -75,7 +75,7 @@ const Home: React.FC = () => {
             />
             <div>{valueError}</div>
 
-            <button
+            <button type="button"
               className="buttonAdd"
             >
               Add New Table
