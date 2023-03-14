@@ -2,7 +2,7 @@
   "name": "typescript-task",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://Vitaliy-Mazurenko.github.io/react-typescript/",
+  "homepage": "https://Vitaliy-Mazurenko.github.io/typescript-task/",
   "dependencies": {
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
