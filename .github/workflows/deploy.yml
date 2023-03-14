@@ -1,24 +1,35 @@
-name: Build and deploy to GitHub Pages
+name: Deploy
 
 on:
   push:
-    branches: [main]
+    branches: [ main ]
 
 jobs:
-  build-and-deploy:
+  deploy:
     runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    permissions:
+      pages: write
+      id-token: write
     steps:
-      - name: Checkout 🛎️
-        uses: actions/checkout@v2.3.1
-
-      - name: Install, lint, build 🔧
-        run: |
-          npm install
-          npm run lint:js
-          npm run build
-
-      - name: Deploy 🚀
-        uses: JamesIves/github-pages-deploy-action@4.1.0
+      - name: checkout
+        uses: actions/checkout@v3
+      - name: setup node
+        uses: actions/setup-node@v3
         with:
-          branch: gh-pages
-          folder: build
+          node-version: 18.x
+      - name: install dependencies
+        run: npm ci
+      - name: build app
+        run: npm run build && npm run gh-pages:404
+        env:
+          PUBLIC_URL: /typescript-task
+      - name: upload artifact
+        uses: actions/upload-pages-artifact@v1
+        with:
+          path: ./build
+      - name: deploy to github pages
+        id: deployment
+        uses: actions/deploy-pages@v1
