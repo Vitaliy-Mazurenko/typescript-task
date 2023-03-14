@@ -43,6 +43,7 @@ const Home: React.FC = () => {
       <div className="creat-wrap">
         <div className="input-wrap">
           <form onSubmit={(e) => handleClick(e)} className="homeForm" ref={ref}>
+          <>{ /* eslint-disable-next-line jsx-a11y/label-has-associated-control */ }</>
             <label htmlFor="columns">columns</label>
             <input
               // autoFocus
@@ -64,7 +65,6 @@ const Home: React.FC = () => {
               onChange={handleChange}
               required
             />
-            <>{ /* eslint-disable-next-line jsx-a11y/label-has-associated-control */ }</>
             <label htmlFor="near">near</label>
             <input
               id="near"
@@ -75,9 +75,9 @@ const Home: React.FC = () => {
               required
             />
             <div>{valueError}</div>
-
             <button type="button"
-              className="buttonAdd">
+              className="buttonAdd"
+              >
               Add New Table
             </button>
           </form>
