@@ -64,6 +64,7 @@ const Home: React.FC = () => {
               onChange={handleChange}
               required
             />
+            <>{ /* eslint-disable-next-line jsx-a11y/label-has-associated-control */ }</>
             <label htmlFor="near">near</label>
             <input
               id="near"
@@ -76,8 +77,7 @@ const Home: React.FC = () => {
             <div>{valueError}</div>
 
             <button type="button"
-              className="buttonAdd"
-            >
+              className="buttonAdd">
               Add New Table
             </button>
           </form>

@@ -52,6 +52,7 @@
     "namedComponents": ["function-declaration", "arrow-function"],
     "unnamedComponents": "arrow-function"
   }
-]
+],
+"semi": [2, "never"]
     }
 }
