@@ -4,7 +4,7 @@ import Table from './components/Table/Table';
 import Home from './components/Home/Home';
 
 const App: React.FC = () => (
-  <div className="App">
+  <div className="App" data-testid="App">
     <Router>
       <Routes>
         <Route path="/table" element={<Table />} />
