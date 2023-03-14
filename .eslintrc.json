@@ -53,6 +53,7 @@
     "unnamedComponents": "arrow-function"
   }
 ],
-"semi": [2, "never"]
+"semi": "off",
+"@typescript-eslint/semi": ["error"]
     }
 }
