@@ -5,7 +5,7 @@ import Home from './components/Home/Home';
 
 const App: React.FC = () => (
   <div className="App" data-testid="App">
-    <Router>
+    <Router basename="/https://Vitaliy-Mazurenko.github.io/typescript-task/">
       <Routes>
         <Route path="/table" element={<Table />} />
         <Route path="/" element={<Home />} />
