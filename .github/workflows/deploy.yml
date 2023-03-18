@@ -19,11 +19,11 @@ jobs:
       - name: setup node
         uses: actions/setup-node@v3
         with:
-          node-version: 14.x
+          node-version: 16.x
       - name: install dependencies
         run: npm ci
       - name: build app
-        run: npm run build && npm run gh-pages:404
+        run: npm run build
         env:
           PUBLIC_URL: /typescript-task
       - name: upload artifact
