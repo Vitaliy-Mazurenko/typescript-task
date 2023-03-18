@@ -10,12 +10,12 @@ function App() {
     <>
     <div className="container">
       </div>
-       <Router>
-       <Switch>
-       <Route path="/table" render={() => <Table/>} />
-        <Route exact path="/"><Home /></Route>
-      </Switch>
- </Router>
+       <Router basename={process.env.PUBLIC_URL || '/'}>
+         <Switch>
+           <Route path="/table" render={() => <Table/>} />
+           <Route exact path="/"><Home /></Route>
+         </Switch>
+       </Router>
 </>
 );
 }
