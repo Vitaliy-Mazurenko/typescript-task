@@ -5,7 +5,7 @@ import {useHistory} from "react-router-dom";
 import { useSelector } from 'react-redux';
 import { selectCells  } from '../../store/taskReducerSlice';
 import Footer from "./Footer";
-import Cells from "./Cells";
+import Rows from "./Rows";
 
 const Table = () => {
   const cells = useSelector(selectCells);
@@ -30,7 +30,7 @@ const Table = () => {
         <table className="Mtable" aria-label="simple table">
           <tbody>
           {[...cells.slice(0, -1)].map((cell, i) => (
-              <Cells key={i} activOn={activOn}
+              <Rows key={i} activOn={activOn}
               activOff={activOff} nearest={nearest}
               activ={activ}
               cell={cell}

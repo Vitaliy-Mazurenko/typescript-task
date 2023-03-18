@@ -1,39 +1,94 @@
-import React from 'react';
-import { useSelector } from 'react-redux';
-import {selectColumns, selectNear, selectCells } from '../../store/taskReducerSlice';
+import React, { useState } from 'react';
+import Button from "@material-ui/core/Button";
+import { useSelector, useDispatch } from 'react-redux';
+import { selectCells, setCells } from '../../store/taskReducerSlice';
+import Cells from "./Cells";
+import { average } from '../../helpers/average';
 
-const Rows = ({ incr, activOn, activOff, nearest, activ, percent, cell, i }) => {
-  const columns = useSelector(selectColumns);
-  const near = useSelector(selectNear);
+const Rows = ({ activOn, activOff, nearest, activ, cell, i }) => {
+  const dispatch = useDispatch();
+  const [percent, setPercent] = useState('');
   const cells = useSelector(selectCells);
 
-  let cellVal = Object.values(cell);
-  let result = cellVal.reduce(function(sum, elem) {
-    return sum + elem;
-  }, 0);
+  const onDelete = (id) => {
+  let newCells = [
+  ...cells.slice(0, +id), ...cells.slice(+id + 1),
+  ];
+  newCells = [...newCells.slice(0, -1)];
 
-  let flatenned = [];
-  if(cells[0]){
-  for(let i = 0; i < cells.length - 1; i++) {
-    flatenned[i] = Object.values(cells[i]);
-   }
-  }
+  const averageCells = average(newCells);
+  dispatch(setCells([...newCells, averageCells]));
+  };
 
-    return(
-      Array.from({length: columns}).map((item, index) => {
-        const color = `red ${1 +'%'}`;
-        const transparent = Math.round((cellVal[index]/result) * 100);
-        return(
-  (percent === i + 'r') ? (
-  <td style={{background: `linear-gradient(to bottom, Transparent ${100 - transparent}%, ${color})`}}
-  key={index}>{transparent +'%'}</td>) : (<td key={index}
- id={i + 'c' + index} className= {(flatenned.flat().sort((x, y) => Math.abs(+nearest - x)
-- Math.abs(+nearest - y)).slice(0, near).some(currentVal => currentVal === cellVal[index]))
- ? (activ) : ''}
- onClick={(e) => incr(e.target.id)}
- onMouseEnter={(e) => activOn(e.target)}
- onMouseLeave={activOff}>{cellVal[index]}</td>))})
-   );
+  const incr = (text) => {
+    let id = text.split('c')[0];
+    let incrId = +text.split('c')[1];
+    let incrCells = [
+      ...cells.slice(+id, +id + 1)
+     ];
+
+    let incrItems = {};
+    function incrRows(cells){
+      const cloneCells = JSON.parse(JSON.stringify(cells));
+      if(cloneCells[0]){
+      let column = Object.values(cloneCells[0]);
+      for (let i = 0; i < column.length; i++) {
+        if (i === incrId) {
+          ++cloneCells[0][incrId]
+        }
+        incrItems[i] = cloneCells[0][i];
+      }
+     }
+    }
+    incrRows(incrCells);
+
+    let newCells = [
+     ...cells.slice(0, +id), incrItems, ...cells.slice(+id + 1),
+    ];
+    newCells = [...newCells.slice(0, -1)];
+
+    const averageCells = average(newCells);
+    dispatch(setCells([...newCells, averageCells]));
+  };
+
+
+    let cellVal = Object.values(cell);
+    let result = cellVal.reduce(function(sum, elem) {
+      return sum + elem;
+    }, 0);
+
+    let flatenned = [];
+    if(cells[0]){
+    for(let i = 0; i < cells.length - 1; i++) {
+      flatenned[i] = Object.values(cells[i]);
+     }
+    }
+    function hoverOn(id) {
+      if(id === (i + 'r')){
+        setPercent(i + 'r');
+      }
+    }
+    function hoverOff() {
+      setPercent('');
+    }
+
+  return(
+    <tr>
+        <Cells incr={incr} activOn={activOn}
+            activOff={activOff} nearest={nearest}
+            activ={activ} percent={percent}
+            cell={cell} i={i}
+             />
+      <td id={i + 'r'} className="tableRes"
+     onMouseEnter={(e) => hoverOn(e.target.id)}
+     onMouseLeave={hoverOff}>
+       {result}</td>
+       <td className="tableEnd">
+      <Button variant="contained" color="secondary"
+       id={i} onClick={() => onDelete(i)}>Delete</Button>
+      </td>
+    </tr>
+  )
 }
 
 export default Rows;

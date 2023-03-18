@@ -1,11 +1,3 @@
-## Тестовое задание
-
-Задание Frontend на работу с объектами
-
-### Технические условия
-
-Использовать react + redux
-
 ### Входящие параметры
 
 Числа M, N, X
@@ -34,4 +26,4 @@
 
 ## Деплой
 
-[Create React App](http://memcrab.victory.vinnica.ua).
+[Create React App](https://vitaliy-mazurenko.github.io/typescript-task/).
