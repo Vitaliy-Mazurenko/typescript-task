@@ -13,7 +13,7 @@ const Cells = ({ incr, activOn, activOff, nearest, activ, percent, cell, i }) =>
   }, 0);
 
   const classNameActiv = useCallback((cells, index) => {
-        console.log(cellVal[index]);
+        console.log(cells);
         let flatenned = [];
         if(cells[0]){
         for(let i = 0; i < cells.length - 1; i++) {
@@ -28,15 +28,19 @@ const Cells = ({ incr, activOn, activOff, nearest, activ, percent, cell, i }) =>
       Array.from({length: columns}).map((item, index) => {
         const color = `red ${1 +'%'}`;
         const transparent = Math.round((cellVal[index]/result) * 100);
+        const background = {background: `linear-gradient(to bottom, Transparent ${100 - transparent}%, ${color})`};
+        const isPercent = percent === i + 'r';
         return(
-  (percent === i + 'r') ? (
-  <td style={{background: `linear-gradient(to bottom, Transparent ${100 - transparent}%, ${color})`}}
+  (isPercent) ? (
+  <td style={background}
   key={index}>{transparent +'%'}</td>) : (<td key={index}
   id={i + 'c' + index} className={(classNameActiv(cells, index))
   ? (activ) : ''}
   onClick={(e) => incr(e.target.id)}
   onMouseEnter={(e) => activOn(e.target)}
-  onMouseLeave={activOff}>{cellVal[index]}</td>))})
+  onMouseLeave={activOff}>{cellVal[index]}</td>)
+  )
+})
   );
 }
 
